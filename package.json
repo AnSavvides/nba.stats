@@ -1,0 +1,22 @@
+{
+  "name": "nba",
+  "version": "0.0.1",
+  "description": "Visualising NBA data",
+  "main": "src/nba.js",
+  "keywords": [
+    "nba",
+    "visualise",
+    "data",
+    "d3"
+  ],
+  "author": "Andreas Savvides",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^5.13.1",
+    "d3": "^3.5.5",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^2.1.4",
+    "jquery": "^2.1.4",
+    "lodash": "^3.8.0"
+  }
+}

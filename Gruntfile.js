@@ -12,10 +12,17 @@ module.exports = function(grunt) {
             prod: {
                 files: browserifyFiles
             }
+        },
+        watch: {
+            scripts: {
+                files: ["src/*.js"],
+                tasks: ["build"]
+            }
         }
     });
 
     grunt.loadNpmTasks("grunt-browserify");
+    grunt.loadNpmTasks("grunt-contrib-watch");
 
     grunt.registerTask("build", ["browserify:prod"]);
 };

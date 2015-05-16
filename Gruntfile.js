@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     "use strict";
 
     var browserifyFiles = {
-        "./dist/build.js": "./src/*.js"
+        "./dist/build.js": "./src/js/*.js"
     };
 
     grunt.initConfig({

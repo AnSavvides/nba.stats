@@ -113,6 +113,7 @@ var renderBubbleChart = function(data) {
 
     tooltip = d3.select("#bubble-chart")
       .append("div")
+      .classed("tooltip", true)
       .style("position", "absolute")
       .style("z-index", "10")
       .style("visibility", "hidden");

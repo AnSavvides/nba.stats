@@ -1,6 +1,6 @@
 # NBA Stats
 
-Ever wondered what the most popular names of NBA players of all time are?
+Ever wondered what the most popular names of NBA players are?
 
 ## Name Stats
 ![Name Stats](name-stats.png)

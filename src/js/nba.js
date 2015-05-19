@@ -5,7 +5,7 @@ import d3 from "d3";
 
 // We define these up here so we can re-use them for updating
 // the bubble chart once it has been created.
-var svg, bubble, text;
+var svg, bubble, text, tooltip;
 var color = d3.scale.category20c();
 
 // Util for getting the duration based on what has been selected
@@ -88,12 +88,20 @@ var renderBubbleChart = function(data) {
 
     node.append("circle")
       .attr("r", d => { return d.r; })
-      .style("fill", d => { return color(d.name); });
+      .style("fill", d => { return color(d.name); })
+      .on("mouseover", d => {
+            return tooltip
+                .style("visibility", "visible")
+                .text(d.name + "(" + d.value + ")");
+      })
+      .on("mousemove", _ => { return tooltip.style("top", (event.pageY - 10)+ "px").style("left",(event.pageX + 10) + "px"); })
+      .on("mouseout", _ => { return tooltip.style("visibility", "hidden"); });
 
     text = node.append("text")
       .attr("dy", ".3em")
       .attr("class", "bubble-text")
       .style("text-anchor", "middle")
+      .style("pointer-events", "none")
       .text(d => {
         // Define a threshold for when to add some text to a bubble; with
         // all time names, we need to bump this up otherwise we will have
@@ -102,6 +110,12 @@ var renderBubbleChart = function(data) {
 
         if (d.value > threshold) { return d.name; }
       });
+
+    tooltip = d3.select("#bubble-chart")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden");
 
     d3.select(document.frameElement).style("height", diameter + "px");
 };

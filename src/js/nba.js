@@ -34,7 +34,7 @@ var updateBubbleChart = function(data) {
     var nodeEnter = node.enter()
         .append("g")
         .attr("class", "node")
-        .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; });
+        .attr("transform", d => { return `translate(${d.x}, ${d.y})`; });
 
     // Re-use enter selection for circles
     nodeEnter
@@ -61,7 +61,7 @@ var updateBubbleChart = function(data) {
 
     node.transition().attr("class", "node")
         .attr("transform", d => {
-            return "translate(" + d.x + "," + d.y + ")";
+            return `translate(${d.x}, ${d.y})`;
         });
 
     node.exit().remove();
@@ -84,7 +84,7 @@ var renderBubbleChart = function(data) {
       .data(bubble.nodes(data).filter(d => { return !d.children; }))
       .enter().append("g")
         .attr("class", "node")
-        .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; });
+        .attr("transform", d => { return `translate(${d.x}, ${d.y})`; });
 
     node.append("circle")
       .attr("r", d => { return d.r; })
@@ -92,9 +92,9 @@ var renderBubbleChart = function(data) {
       .on("mouseover", d => {
             return tooltip
                 .style("visibility", "visible")
-                .text(d.name + "(" + d.value + ")");
+                .text(`${d.name} (${d.value})`);
       })
-      .on("mousemove", _ => { return tooltip.style("top", (event.pageY - 10)+ "px").style("left",(event.pageX + 10) + "px"); })
+      .on("mousemove", _ => { return tooltip.style("top", (event.pageY - 10) + "px").style("left",(event.pageX + 10) + "px"); })
       .on("mouseout", _ => { return tooltip.style("visibility", "hidden"); });
 
     text = node.append("text")
@@ -118,7 +118,7 @@ var renderBubbleChart = function(data) {
       .style("z-index", "10")
       .style("visibility", "hidden");
 
-    d3.select(document.frameElement).style("height", diameter + "px");
+    d3.select(document.frameElement).style("height", `${diameter} px`);
 };
 
 var formatData = function(data) {

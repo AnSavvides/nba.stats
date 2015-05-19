@@ -10,7 +10,10 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
         browserify: {
             prod: {
-                files: browserifyFiles
+                files: browserifyFiles,
+                options: {
+                    transform: [["babelify", { "stage": 0 }]]
+                }
             }
         },
         watch: {

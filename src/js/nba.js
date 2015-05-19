@@ -94,8 +94,17 @@ var renderBubbleChart = function(data) {
                 .style("visibility", "visible")
                 .text(`${d.name} (${d.value})`);
       })
-      .on("mousemove", _ => { return tooltip.style("top", (event.pageY - 10) + "px").style("left",(event.pageX + 10) + "px"); })
-      .on("mouseout", _ => { return tooltip.style("visibility", "hidden"); });
+      .on("mousemove", _ => {
+            var top = (event.pageY - 10);
+            var left = (event.pageX + 10);
+
+            return tooltip
+                .style("top",  `${top}px`)
+                .style("left", `${left}px`);
+        })
+      .on("mouseout", _ => {
+            return tooltip.style("visibility", "hidden");
+        });
 
     text = node.append("text")
       .attr("dy", ".3em")

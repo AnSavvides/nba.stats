@@ -1,11 +1,10 @@
 "use strict";
 
-var $ = require("jquery");
-var d3 = require("d3");
-var _ = require("lodash");
+import $ from "jquery";
+import d3 from "d3";
 
 // We define these up here so we can re-use them for updating
-// the bubble chart once it has been created
+// the bubble chart once it has been created.
 var svg, bubble, text;
 var color = d3.scale.category20c();
 
@@ -107,11 +106,24 @@ var renderBubbleChart = function(data) {
     d3.select(document.frameElement).style("height", diameter + "px");
 };
 
+var formatData = function(data) {
+    var formattedData = [];
+
+    Object.keys(data).forEach(key => {
+        formattedData.push({
+            name: key,
+            value: data[key]
+        });
+    });
+
+    return formattedData;
+};
+
 var getMostPupularNames = function(data) {
     var allPlayers = data.resultSets[0].rowSet;
     var mostPopularNames = {};
 
-    _.each(allPlayers, function(player) {
+    allPlayers.forEach(player => {
         var playerFirstName = player[1].split(", ")[1];
 
         if (mostPopularNames.hasOwnProperty(playerFirstName)) {
@@ -121,9 +133,7 @@ var getMostPupularNames = function(data) {
         }
     });
 
-    return _.map(mostPopularNames, function(value, key) {
-        return { name: key, value: value };
-    });
+    return formatData(mostPopularNames);
 };
 
 var makeRequestAndRenderBubbleChart = function(renderFunction) {

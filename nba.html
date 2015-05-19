@@ -7,9 +7,21 @@
     <link rel="stylesheet" href="src/styles/nba.css">
   </head>
   <body>
-  	<div id="bubble-chart">
-  		<h2>NBA Stats</h2>
-  	</div>
+    <h2>NBA Stats</h2>
+    <form>
+        <div id="duration">
+            <p>
+                <label for="all">All Time</label>
+                <input type="radio" name="duration" id="all" required checked value="all" />
+            </p>
+            <p>
+                <label for="current">Current Season</label>
+                <input type="radio" name="duration" id="current" value="current" />
+            </p>
+        </div>
+    </form>
+    <div id="bubble-chart">
+    </div>
     <script src="dist/build.js"></script>
   </body>
 </html>

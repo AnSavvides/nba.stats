@@ -25,7 +25,7 @@ var getNbaStatsAPI = function() {
 };
 
 var updateBubbleChart = function(data) {
-    var formattedData = bubble.nodes(data).filter(function(d) { return !d.children; });
+    var formattedData = bubble.nodes(data).filter(d => { return !d.children; });
 
     var node = svg.selectAll(".node")
         .data(formattedData);
@@ -34,33 +34,33 @@ var updateBubbleChart = function(data) {
     var nodeEnter = node.enter()
         .append("g")
         .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; });
 
     // Re-use enter selection for circles
     nodeEnter
         .append("circle")
-        .attr("r", function (d) { return d.r; })
-        .style("fill", function (d, i) { return color(i); });
+        .attr("r", d => { return d.r; })
+        .style("fill", (d, i) => { return color(i); });
 
     // Re-use enter selection for text
     text
         .data(formattedData)
-        .text(function (d) {
+        .text(d => {
             var threshold = getDuration() === 0 ? 15 : 2;
             if (d.value > threshold) { return d.name; }
         });
 
     node.select("circle")
         .transition().duration(1000)
-        .attr("r", function (d) {
+        .attr("r", d => {
             return d.r;
         })
-        .style("fill", function (d, i) {
+        .style("fill", (d, i) => {
             return color(i);
         });
 
     node.transition().attr("class", "node")
-        .attr("transform", function (d) {
+        .attr("transform", d => {
             return "translate(" + d.x + "," + d.y + ")";
         });
 
@@ -81,20 +81,20 @@ var renderBubbleChart = function(data) {
         .attr("class", "bubble");
 
     var node = svg.selectAll(".node")
-      .data(bubble.nodes(data).filter(function(d) { return !d.children; }))
+      .data(bubble.nodes(data).filter(d => { return !d.children; }))
       .enter().append("g")
         .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        .attr("transform", d => { return "translate(" + d.x + "," + d.y + ")"; });
 
     node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return color(d.name); });
+      .attr("r", d => { return d.r; })
+      .style("fill", d => { return color(d.name); });
 
     text = node.append("text")
       .attr("dy", ".3em")
       .attr("class", "bubble-text")
       .style("text-anchor", "middle")
-      .text(function(d) {
+      .text(d => {
         // Define a threshold for when to add some text to a bubble; with
         // all time names, we need to bump this up otherwise we will have
         // way too much text flying around in the UI.

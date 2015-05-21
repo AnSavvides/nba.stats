@@ -2,6 +2,7 @@
 
 import $ from "jquery";
 import d3 from "d3";
+import nprogress from "nprogress";
 
 // We define these up here so we can re-use them for updating
 // the bubble chart once it has been created.
@@ -163,11 +164,14 @@ var getMostPupularNames = function(data) {
 var makeRequestAndRenderBubbleChart = function(renderFunction) {
     var nbaStatsAPI = getNbaStatsAPI();
 
+    nprogress.start();
+
     $.ajax(nbaStatsAPI, {
         dataType: "jsonp"
     })
     .done(function(data) {
         renderFunction({ children: getMostPupularNames(data) });
+        nprogress.done();
     });
 };
 
